@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import { fetchUser } from "../redux/actions";
+import { fetchUser, fetchUserPosts } from "../redux/actions";
 
 import Feed from "./main/Feed";
 import Profile from "./main/Profile";
@@ -33,11 +33,11 @@ export class Main extends Component {
 
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchUserPosts();
   }
 
   render() {
     const { currentUser } = this.props;
-    console.log("render", currentUser);
 
     return (
       <Tab.Navigator labeled={false} initialRouteName="Feed">
@@ -87,5 +87,5 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ fetchUser }, dispatch);
+  bindActionCreators({ fetchUser, fetchUserPosts }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

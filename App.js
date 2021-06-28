@@ -14,6 +14,7 @@ import rootReducers from "./redux/reducers";
 import Loading from "./components/Loading";
 import Main from "./components/Main";
 import Add from "./components/main/Add";
+import Save from "./components/main/Save";
 import { Login, Landing, Register } from "./components/auth";
 
 const store = createStore(rootReducers, applyMiddleware(thunk));
@@ -89,6 +90,7 @@ export default class App extends React.Component {
           >
             <Stack.Screen name="Main" component={Main} />
             <Stack.Screen name="Add" component={Add} />
+            <Stack.Screen name="Save" component={Save} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
