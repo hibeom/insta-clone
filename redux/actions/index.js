@@ -46,3 +46,40 @@ export function fetchUserPosts() {
       });
   };
 }
+
+export function fetchUserFollowing() {
+  return (dispatch) => {
+    // firebase
+    //   .firestore()
+    //   .collection("following")
+    //   .doc(firebase.auth().currentUser.uid)
+    //   .collection("userFollowing")
+    //   .get()
+    //   .then((snapshot) => {
+    //     let following = snapshot.docs.map((doc) => {
+    //       return doc.id;
+    //     });
+    //     dispatch({ type: USER_FOLLOWING_STATE_CHANGE, following });
+    //   });
+
+    // 위처럼 get().then()... 방식은 fetchUserFollowing 호출 시에만 가져오게된다.
+    // 위 방식을 이용하려면, Profile 에서 onFollow, onUnFollow 할 시에 mapDispatchToProps 를 이용해
+    // 매번 fetchUserFollowing 을 호출해야한다.
+
+    // 그러나 아래 방식처럼 onSnapshot 을 이용하면
+    // collection 혹은 doc 콘텐츠가 변경될 때마다 콜백 호출되어 수신 대기 상태가 된다.
+    // 알아서 리스너를 생성해준다.
+
+    firebase
+      .firestore()
+      .collection("following")
+      .doc(firebase.auth().currentUser.uid)
+      .collection("userFollowing")
+      .onSnapshot((snapshot) => {
+        let following = snapshot.docs.map((doc) => {
+          return doc.id;
+        });
+        dispatch({ type: USER_FOLLOWING_STATE_CHANGE, following });
+      });
+  };
+}
