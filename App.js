@@ -15,6 +15,7 @@ import Loading from "./components/Loading";
 import Main from "./components/Main";
 import Add from "./components/main/Add";
 import Save from "./components/main/Save";
+import Comment from "./components/main/Comment";
 import { Login, Landing, Register } from "./components/auth";
 
 const store = createStore(rootReducers, applyMiddleware(thunk));
@@ -91,6 +92,7 @@ export default class App extends React.Component {
             <Stack.Screen name="Main" component={Main} />
             <Stack.Screen name="Add" component={Add} />
             <Stack.Screen name="Save" component={Save} />
+            <Stack.Screen name="Comment" component={Comment} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

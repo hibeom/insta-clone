@@ -25,6 +25,8 @@ export const user = (state = initialState, action) => {
         ...state,
         following: action.following,
       };
+    case CLEAR_DATA:
+      return initialState;
     default:
       return state;
   }

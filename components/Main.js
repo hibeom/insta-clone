@@ -10,6 +10,7 @@ import {
   fetchUser,
   fetchUserPosts,
   fetchUserFollowing,
+  clearData,
 } from "../redux/actions";
 
 import Feed from "./main/Feed";
@@ -37,6 +38,7 @@ export class Main extends Component {
   }
 
   componentDidMount() {
+    this.props.clearData();
     this.props.fetchUser();
     this.props.fetchUserPosts();
     this.props.fetchUserFollowing();
@@ -111,7 +113,7 @@ const mapStateToProps = (store) => ({
 });
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
-    { fetchUser, fetchUserPosts, fetchUserFollowing },
+    { fetchUser, fetchUserPosts, fetchUserFollowing, clearData },
     dispatch
   );
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
